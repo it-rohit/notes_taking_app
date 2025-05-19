@@ -1,0 +1,23 @@
+# Ignore IDEA IDE files
+.idea/
+
+# Ignore compiled Python files
+*.pyc
+
+# Ignore the SQLite database file
+db.sqlite3
+
+# Ignore virtual environment folder
+/env/
+
+**/media/
+
+# Ignore the .env file(s)
+*.env
+.env
+
+# Ignore migrations folder in any directory
+# **/migrations/
+
+.vscode/
+venv/
