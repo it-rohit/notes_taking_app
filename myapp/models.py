@@ -50,11 +50,10 @@ class CustomUser(AbstractBaseUser):
     last_update = models.DateTimeField(auto_now=True)
     created_on = models.DateTimeField(auto_now_add=True)
 
-    is_active = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_superadmin = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
-    
     USERNAME_FIELD   = "email"
     REQUIRED_FIELDS = ['firstname','lastname','username']
     objects = UserManager()
@@ -66,3 +65,15 @@ class CustomUser(AbstractBaseUser):
     
     def has_module_perms(self,app_label):
         return True
+    
+class Notes(models.Model):
+    note_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    note_title = models.CharField(max_length=255)
+    note_content = models.TextField()
+    last_update = models.DateTimeField(auto_now=True)
+    created_on = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='notes')  
+
+    def __str__(self):
+        return self.note_title
+    

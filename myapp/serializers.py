@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import CustomUser
+from .models import CustomUser,Notes
 from django.contrib.auth import authenticate
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -36,3 +36,9 @@ class LoginSerializer(serializers.Serializer):
         
         data['user'] = user
         return data
+    
+class NotesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Notes
+        fields = '__all__'
+        read_only_fields = ['note_id', 'created_on', 'last_update']
